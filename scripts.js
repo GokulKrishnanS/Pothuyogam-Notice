@@ -16,34 +16,20 @@ const meetingTimeElement = document.getElementById("meeting-time");
 const createDateElement = document.getElementById("create-date");
 const agendaElement = document.getElementById("agenda-matter");
 const shareButton = document.getElementById("share");
-const normalAgenda =
-	"പ്രതിമാസ കരയോഗം നടപടികൾ, വാത്തികുളം ദേവീക്ഷേത്ര സംബന്ധമായ കാര്യങ്ങൾ, ഉത്സവം ഒരു അവലോകനം, മറ്റ് അത്യാവശ്യകാര്യങ്ങൾ";
-
-mTime = getLocalValues("meetingTime");
-meetingTimeElement.textContent =
-	mTime !== null && mTime !== "" ? mTime : "പൊതുയോഗ സമയം";
-
-cDate = getLocalValues("createDate");
-createDateElement.textContent =
-	cDate !== null && cDate !== "" ? cDate : "തീയതി";
-
-localAgenda = getLocalValues("localAgenda");
-agendaElement.textContent =
-	localAgenda !== null && localAgenda !== "" ? localAgenda : normalAgenda;
 
 meetingTimeElement.addEventListener("click", () => {
 	let message = "പൊതുയോഗ സമയം തിരുത്തുക";
-	editValues(meetingTimeElement, message, mTime, "meetingTime"); // meetingTime is Local Storage Name
+	editValues(meetingTimeElement, message, "meetingTime"); // meetingTime is Local Storage Name
 });
 
 createDateElement.addEventListener("click", () => {
 	let message = "തീയതി തിരുത്തുക";
-	editValues(createDateElement, message, cDate, "createDate"); // createDate is Local Storage Name
+	editValues(createDateElement, message, "createDate"); // createDate is Local Storage Name
 });
 
 agendaElement.addEventListener("click", () => {
 	let message = "അജണ്ട തിരുത്തുക";
-	editValues(agendaElement, message, localAgenda, "localAgenda"); // createDate is Local Storage Name
+	editValues(agendaElement, message, "localAgenda"); // createDate is Local Storage Name
 });
 
 //All event listeners starting from here
@@ -61,20 +47,45 @@ function scalePoster() {
 	const scale = Math.min(maxDisplayWidth / baseWidth, 1);
 
 	poster.style.transform = `scale(${scale})`;
-	console.log("OK");
 }
 
 // Scale poster on load and resize
 window.addEventListener("load", scalePoster);
 window.addEventListener("resize", scalePoster);
 
-function editValues(domComponent, message, oldValue, localStorageName) {
-	let newValue = prompt(message, oldValue !== null ? oldValue : "");
+// Function to edit values from the tab and save to local storage
+function editValues(domComponent, label, localStorageName) {
+	const dataTab = document.getElementById("input-area");
+	const dataLabel = document.getElementById("data-label");
+	const textArea = document.getElementById("data-input");
+	const updateButton = document.getElementById("update-button");
+	const cancelButton = document.getElementById("cancel-button");
+	const normalAgenda = "പ്രതിമാസ കരയോഗം നടപടികൾ, മറ്റ് അത്യാവശ്യകാര്യങ്ങൾ";
+	let oldValue =
+		getLocalValues(localStorageName) === null
+			? ""
+			: getLocalValues(localStorageName);
 
-	if (newValue !== null && newValue !== "") {
-		setLocalValues(localStorageName, newValue);
-		domComponent.textContent = newValue;
+	if (localStorageName === "localAgenda" && oldValue === "") {
+		oldValue = normalAgenda;
 	}
+
+	dataLabel.textContent = label;
+	textArea.value = oldValue !== null ? oldValue : "";
+	dataTab.style.display = "block";
+
+	updateButton.onclick = function () {
+		let newValue = textArea.value;
+		if (newValue !== null && newValue !== "") {
+			setLocalValues(localStorageName, newValue);
+			domComponent.textContent = newValue;
+		}
+		dataTab.style.display = "none";
+	};
+
+	cancelButton.onclick = function () {
+		dataTab.style.display = "none";
+	};
 }
 
 function getLocalValues(localStorageName) {
