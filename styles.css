@@ -1,0 +1,138 @@
+@font-face {
+  font-family: myFont; /* set name */
+  src: url(./fonts/NotoSansMalayalam-VariableFont_wdth,wght.ttf); /* url of the font */
+}
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+html body{
+	border: none;
+	width: 2000px;
+}
+
+.main-container{
+	width: 2000px;
+	background-color: #F8E4C5;
+	display: grid;
+	grid-template-rows: 400px auto 150px;
+	margin: 10px;
+	font-family: myFont;
+	font-weight: bold;
+	font-size: 2em;
+	grid-row-gap: 50px;
+}
+
+.header{
+	display: grid;
+	grid-template-columns: 380px auto 380px;
+	padding-left: 10px;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+.body-section, .footer{
+	margin-top: 10px;
+	padding-left: 20px;
+	padding-right: 10px;
+	width: 1900px;
+	text-align: justify;
+	margin-left: 20px;
+	font-size: 1.2em;
+	display: grid;
+}
+
+.body-section{
+	justify-self: center;
+}
+
+.footer{
+	grid-template-columns: 1200px 600px;
+	margin-left: 40px;
+	padding-bottom: 20px;
+	font-size: 1.1em;
+}
+
+.heading-container, .nss-logo-container, .mannam-photo-container{
+	display: inline;
+	margin-top: 30px;
+}
+
+#nss-logo, #mannam-photo{
+	height: 340px;
+	width: 340px;
+	border-radius: 50%;
+}
+
+#nss-logo{
+	border-radius: 0%;
+}
+
+.heading-container, #main-heading, #nss-heading, #nss-number, #notice-heading{
+	justify-self: center;
+}
+
+#main-heading{
+	font-size: 3.8em;
+	color: #FD6C34;
+}
+
+#nss-heading, #nss-number{
+	font-size: 1.9em;
+}
+
+#notice-heading{
+	background-color: #5E17EB;
+	margin-top: 10px;
+	padding: 10px 60px 10px 60px;
+    border-radius: 15px;
+    font-size: 1.2em;
+    color: white;
+}
+
+#meeting-time{
+	font-size: 1.2em;
+	padding: 2px 2px 2px 2px;
+	color: #F42851;
+}
+
+#matter-second-part{
+	color: #F42851;
+	font-size: 1.1em;
+}
+
+
+#signature-section{
+	text-align: right;
+}
+
+#matter-first-part, #matter-second-part, #matter-third-part{
+	padding-top: 30px;
+}
+
+.share-section{
+	margin-top: 50px;
+	justify-self: center;
+}
+
+#share{
+	width: 700px;
+	height: 350px;
+	background-color: #287EB9;
+	font-size: 8em;
+	font-weight: bold;
+	border-radius: 500px;
+	color: white;
+	box-shadow: 5px 10px #888888;
+}
+
+#share:active{
+	background-color: #12BEDD;
+	color: #B3B3D8;
+}
+
+.clickable-span:hover{
+	cursor: pointer;
+}
