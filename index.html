@@ -76,11 +76,17 @@
 		</div>
 	</div>
 
-	<div id="input-area">
+	<!-- Backdrop for modal dialog -->
+	<div id="modal-backdrop" aria-hidden="true"></div>
+
+	<!-- Popup input-area shown as a modal dialog -->
+	<div id="input-area" role="dialog" aria-modal="true" aria-hidden="true">
 		<label id="data-label" for="data-input"></label>
 		<textarea id="data-input" rows="10" cols="50"></textarea>
-		<button id="update-button">Update Notice</button>
-		<button id="cancel-button">Cancel</button>
+		<div style="margin-top:8px; text-align:right;">
+			<button id="update-button">Update Notice</button>
+			<button id="cancel-button">Cancel</button>
+		</div>
 	</div>
 
 	<div class="share-section">

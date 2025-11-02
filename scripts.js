@@ -99,31 +99,66 @@ function setLocalValues(localStorageName, newValue) {
 
 function convertDivToImage() {
 	let imageDiv = document.querySelector(".main-container");
-	html2canvas(imageDiv, { useCORS: true }).then(async (canvas) => {
-		const dataUrl = canvas.toDataURL("image/png");
-
-		if (navigator.canShare && navigator.canShare({ files: [] })) {
-			try {
-				const res = await fetch(dataUrl);
-				const blob = await res.blob();
-				const file = new File([blob], "div-snapshot.png", {
-					type: "image/png",
-				});
-
-				await navigator.share({
-					files: [file],
-					title: "Div Snapshot",
-					text: "Sharing a snapshot of the div.",
-				});
-			} catch (error) {
-				alert("Sharing failed: " + error.message);
+	html2canvas(imageDiv, { useCORS: true }).then((canvas) => {
+		// Prefer to get a Blob directly from the canvas
+		canvas.toBlob(async (blob) => {
+			if (!blob) {
+				alert("Failed to create image blob.");
+				return;
 			}
-		} else {
-			// fallback to download
-			const link = document.createElement("a");
-			link.download = "div-snapshot.png";
-			link.href = dataUrl;
-			link.click();
-		}
+
+			const file = new File([blob], "div-snapshot.png", {
+				type: "image/png",
+			});
+
+			// If Web Share with files is supported, use it (most modern Android browsers)
+			if (
+				navigator.canShare &&
+				navigator.canShare({ files: [file] }) &&
+				navigator.share
+			) {
+				try {
+					await navigator.share({
+						files: [file],
+						title: "Div Snapshot",
+						text: "Sharing a snapshot of the div.",
+					});
+					return;
+				} catch (err) {
+					// Fall through to other fallbacks
+					console.warn("Share with files failed:", err);
+				}
+			}
+
+			// If navigator.share exists but file-sharing isn't supported, try sharing a blob URL
+			if (navigator.share && typeof URL !== "undefined") {
+				const blobUrl = URL.createObjectURL(blob);
+				try {
+					await navigator.share({
+						url: blobUrl,
+						title: "Div Snapshot",
+						text: "Sharing a snapshot of the div.",
+					});
+					// revoke after a short delay to ensure the share dialog can access it
+					setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+					return;
+				} catch (err) {
+					console.warn("Share with blob URL failed:", err);
+					// revoke and fall back
+					URL.revokeObjectURL(blobUrl);
+				}
+			}
+
+			// Last-resort fallback: trigger a download so user can manually share the saved image
+			const reader = new FileReader();
+			reader.onloadend = function () {
+				const dataUrl = reader.result;
+				const link = document.createElement("a");
+				link.download = "div-snapshot.png";
+				link.href = dataUrl;
+				link.click();
+			};
+			reader.readAsDataURL(blob);
+		}, "image/png");
 	});
 }
