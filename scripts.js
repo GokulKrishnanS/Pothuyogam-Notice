@@ -72,7 +72,22 @@ function editValues(domComponent, label, localStorageName) {
 
 	dataLabel.textContent = label;
 	textArea.value = oldValue !== null ? oldValue : "";
-	dataTab.style.display = "block";
+
+	// Show modal and backdrop, set ARIA, lock body scroll and focus textarea (mobile friendly)
+	const backdrop = document.getElementById("modal-backdrop");
+	dataTab.classList.add("visible");
+	backdrop.classList.add("visible");
+	dataTab.setAttribute("aria-hidden", "false");
+	backdrop.setAttribute("aria-hidden", "false");
+	// prevent background scrolling while modal is open
+	document.body.style.overflow = "hidden";
+
+	// Focus the textarea after a brief delay so the keyboard opens on mobile
+	setTimeout(() => {
+		textArea.focus();
+		// ensure the textarea is visible on small screens
+		textArea.scrollIntoView({ behavior: "smooth", block: "center" });
+	}, 80);
 
 	updateButton.onclick = function () {
 		let newValue = textArea.value;
@@ -80,11 +95,21 @@ function editValues(domComponent, label, localStorageName) {
 			setLocalValues(localStorageName, newValue);
 			domComponent.textContent = newValue;
 		}
-		dataTab.style.display = "none";
+		// hide modal and backdrop, restore body scroll
+		dataTab.classList.remove("visible");
+		backdrop.classList.remove("visible");
+		dataTab.setAttribute("aria-hidden", "true");
+		backdrop.setAttribute("aria-hidden", "true");
+		document.body.style.overflow = "";
 	};
 
 	cancelButton.onclick = function () {
-		dataTab.style.display = "none";
+		// hide modal and backdrop, restore body scroll
+		dataTab.classList.remove("visible");
+		backdrop.classList.remove("visible");
+		dataTab.setAttribute("aria-hidden", "true");
+		backdrop.setAttribute("aria-hidden", "true");
+		document.body.style.overflow = "";
 	};
 }
 
