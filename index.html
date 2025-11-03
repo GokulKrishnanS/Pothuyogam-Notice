@@ -1,79 +1,72 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html>
+<html lang="ml">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.1">
-	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>പൊതുയോഗം നോട്ടീസ്</title>
 	<link rel="stylesheet" href="styles.css">
-	<!-- <link rel="manifest" href="/manifest.json" /> -->
-	<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/icon-32.png">
 	<script src="scripts.js" defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-	<div class="wrapper">
-		<div class= "main-container">
-			<div class="header">
-				<div class= "nss-logo-container" >
-					<img src="./images/nss-logo.png" id="nss-logo" crossorigin="anonymous"/>
-				</div>
-                
-				<div class= "heading-container">
-					<p id="main-heading">ഷണ്മുഖവിലാസം</p>
-					<p id="nss-heading">എൻ.എസ്സ്.എസ്സ് കരയോഗം</p> 
-					<p id="nss-number">നമ്പർ 37, വാത്തികുളം</p>
-					</p>
-					<p id="notice-heading">പൊതുയോഗം അറിയിപ്പ്</p>
-				</div>
-                
-				<div class= "mannam-photo-container">
-					<img src="./images/mannam.png" id="mannam-photo" crossorigin="anonymous"/>
-				</div>
+	<div id="main-container" grid-area="main">
+		
+		<div id="header-container" grid-area="header">
+			<!-- NSS Logo Image holding container -->
+			<div id="nss-logo-container" class="photos-container">
+				<img id="nss-logo" class="photos" src="images/nss-logo.png" alt="NSS Logo">
 			</div>
-            
+			<!-- Container holding all the headings -->
+			<div id="heading-container" class="heading-container">
+				<p id="main-heading" class="heading-texts">ഷണ്മുഖവിലാസം</p>
+				<p id="sub-heading" class="heading-texts">എൻ.എസ്സ്.എസ്സ് കരയോഗം<br>
+				നമ്പർ 37, വാത്തികുളം</p>
+				<p id="notice-heading" class="heading-texts">പൊതുയോഗം നോട്ടീസ്</p>
+			</div>
+			<!-- Mannam Photo Image holding container -->
+			<div id="mannam-photo-container" class="photos-container">
+				<img id="mannam-photo" class="photos" src="images/mannam.png" alt="Mannam Photo">
+			</div>
+		</div>
 
-			<div class="body-section">
-				<div class= "matter-container">
-					<p id="matter-first-part">
+		<div id="body-container" grid-area="body">
+			<div id="matter-container" class= "matter-container">
+					<p id="matter-first-part" class="body-texts">
 						ബഹുമാന്യരേ,<br>&emsp;&emsp;&emsp;&emsp;
-						37-ാം നമ്പർ ഷണ്മുഖവിലാസം എൻ.എസ്സ്.എസ്സ് കരയോഗത്തിൻ്റെ ഈ മാസത്തെ പൊതുയോഗം
-					<span class="clickable-span" id="meeting-time"> ഏപ്രിൽ 9 ഞായറാഴ്ച്ച രാവിലെ 10 മണിക്ക്</span>
-						കരയോഗം പ്രസിഡൻ്റിൻ്റെ അദ്ധ്യക്ഷതയിൽ കരയോഗമന്ദിരത്തിൽവച്ച് കൂടുന്നതാണ്.
+						37-ാം നമ്പർ ഷണ്മുഖവിലാസം എൻ.എസ്സ്.എസ്സ് കരയോഗത്തിൻ്റെ ഈ മാസത്തെ പൊതുയോഗം&nbsp;
+					<span class="clickable-span red-text" id="meeting-time">ഏപ്രിൽ 9 ഞായറാഴ്ച്ച രാവിലെ 10 മണിക്ക്</span>
+						&nbsp;കരയോഗം പ്രസിഡൻ്റിൻ്റെ അദ്ധ്യക്ഷതയിൽ കരയോഗമന്ദിരത്തിൽവച്ച് കൂടുന്നതാണ്.
 					</p>
-					<p id="matter-second-part">
+					<p id="matter-second-part" class="body-texts red-text">
 						അജണ്ട: 
 						<span class="clickable-span" id="agenda-matter">
-							പ്രതിമാസ കരയോഗം നടപടികൾ, വാത്തികുളം ദേവീക്ഷേത്ര സംബന്ധമായ കാര്യങ്ങൾ, ഉത്സവം ഒരു അവലോകനം, മറ്റ് അത്യാവശ്യകാര്യങ്ങൾ.
+							പ്രതിമാസ കരയോഗം നടപടികൾ, മറ്റ് അത്യാവശ്യകാര്യങ്ങൾ.
 						</span>
 					</p>
-					<p id="matter-third-part">
-						എല്ലാ അംഗങ്ങളും പ്രത്യേകിച്ച് മറ്റ് പരിപാടികൾ ക്രമീകരിച്ച്  കൃത്യസമയത്തുതന്നെ യോഗത്തിൽ പങ്കെടുക്കണമെന്ന് താൽപര്യപ്പെടുന്നു.
+					<p id="matter-third-part" class="body-texts">
+						എല്ലാ അംഗങ്ങളും മറ്റ് പരിപാടികൾ ക്രമീകരിച്ച്  കൃത്യസമയത്തുതന്നെ യോഗത്തിൽ പങ്കെടുക്കണമെന്ന് താൽപര്യപ്പെടുന്നു.
 					</p>
-				</div>
 			</div>
-            
-            
-			<div class="footer">
-				<div class= "place-date-container">
-					<p>
-						സ്ഥലം &nbsp;: വാത്തികുളം<br>
-						തീയതി : <span class="clickable-span" id="create-date"> 07/03/2025	 </span>
-					</p>
-				</div>
-                
-				<div class= "closing-container">
-					<p>
-						എന്നും കരയോഗത്തിനുവേണ്ടി,
-					</p>
-					<p id="signature-section">
-						സെക്രട്ടറി
-					</p>
-				</div>
-			</div>
-
 		</div>
+		
+		<div id="footer-container" grid-area="footer">
+			<div class= "place-date-container">
+				<p>
+					സ്ഥലം &nbsp;: വാത്തികുളം<br>
+					തീയതി : <span class="clickable-span" id="create-date"> 07/03/2025	 </span>
+				</p>
+			</div>
+			
+			<div class= "closing-container">
+				<p>
+					എന്ന് കരയോഗത്തിനുവേണ്ടി,
+				</p>
+				<p id="signature-section" style="padding-left: 10%;">
+					സെക്രട്ടറി
+				</p>
+			</div>
+		</div>
+		
 	</div>
 
 	<!-- Backdrop for modal dialog -->
@@ -89,8 +82,8 @@
 		</div>
 	</div>
 
-	<div class="share-section">
-		<button id="share">Share</button>
+	<div id="share-section" class="share-section">
+		<button id="share-button">Share</button>
 	</div>
 </body>
 </html>

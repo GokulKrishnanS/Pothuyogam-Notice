@@ -15,7 +15,23 @@ if ("serviceWorker" in navigator) {
 const meetingTimeElement = document.getElementById("meeting-time");
 const createDateElement = document.getElementById("create-date");
 const agendaElement = document.getElementById("agenda-matter");
-const shareButton = document.getElementById("share");
+const shareButton = document.getElementById("share-button");
+
+window.addEventListener("load", () => {
+	// Load saved values from local storage on page load
+	let savedMeetingTime = getLocalValues("meetingTime");
+	if (savedMeetingTime !== null) {
+		meetingTimeElement.textContent = savedMeetingTime;
+	}
+	let savedCreateDate = getLocalValues("createDate");
+	if (savedCreateDate !== null) {
+		createDateElement.textContent = savedCreateDate;
+	}
+	let savedAgenda = getLocalValues("localAgenda");
+	if (savedAgenda !== null) {
+		agendaElement.textContent = savedAgenda;
+	}
+});
 
 meetingTimeElement.addEventListener("click", () => {
 	let message = "പൊതുയോഗ സമയം തിരുത്തുക";
@@ -32,28 +48,6 @@ agendaElement.addEventListener("click", () => {
 	editValues(agendaElement, message, "localAgenda"); // createDate is Local Storage Name
 });
 
-//All event listeners starting from here
-// Share button listener
-shareButton.addEventListener("click", convertDivToImage);
-
-//All functions starting from here
-// Function to scale the poster based on window size
-function scalePoster() {
-	const poster = document.querySelector(".main-container");
-	const baseWidth = 2000;
-	const windowWidth = window.innerWidth;
-	const maxDisplayWidth = windowWidth * 0.9; // 90% of window width
-
-	const scale = Math.min(maxDisplayWidth / baseWidth, 1);
-
-	poster.style.transform = `scale(${scale})`;
-}
-
-// Scale poster on load and resize
-window.addEventListener("load", scalePoster);
-window.addEventListener("resize", scalePoster);
-
-// Function to edit values from the tab and save to local storage
 function editValues(domComponent, label, localStorageName) {
 	const dataTab = document.getElementById("input-area");
 	const dataLabel = document.getElementById("data-label");
@@ -72,8 +66,6 @@ function editValues(domComponent, label, localStorageName) {
 
 	dataLabel.textContent = label;
 	textArea.value = oldValue !== null ? oldValue : "";
-
-	// Show modal and backdrop, set ARIA, lock body scroll and focus textarea (mobile friendly)
 	const backdrop = document.getElementById("modal-backdrop");
 	dataTab.classList.add("visible");
 	backdrop.classList.add("visible");
@@ -123,7 +115,7 @@ function setLocalValues(localStorageName, newValue) {
 }
 
 function convertDivToImage() {
-	let imageDiv = document.querySelector(".main-container");
+	let imageDiv = document.getElementById("main-container");
 	html2canvas(imageDiv, { useCORS: true }).then((canvas) => {
 		// Prefer to get a Blob directly from the canvas
 		canvas.toBlob(async (blob) => {
@@ -132,7 +124,7 @@ function convertDivToImage() {
 				return;
 			}
 
-			const file = new File([blob], "div-snapshot.png", {
+			const file = new File([blob], "Pothuyogam-Notice.png", {
 				type: "image/png",
 			});
 
@@ -179,7 +171,7 @@ function convertDivToImage() {
 			reader.onloadend = function () {
 				const dataUrl = reader.result;
 				const link = document.createElement("a");
-				link.download = "div-snapshot.png";
+				link.download = "Pothuyogam-Notice.png";
 				link.href = dataUrl;
 				link.click();
 			};
@@ -187,3 +179,4 @@ function convertDivToImage() {
 		}, "image/png");
 	});
 }
+shareButton.addEventListener("click", convertDivToImage);
