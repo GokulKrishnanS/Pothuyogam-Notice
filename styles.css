@@ -45,7 +45,7 @@ body{
 }
 
 .photos {
-    width: 70%;
+    width: 6rem;
     aspect-ratio: 1/1;
     object-fit: contain;
 }
@@ -57,18 +57,18 @@ body{
 
 #main-heading {
     flex-shrink: 1;
-    font-size: 5vw;
+    font-size: 2rem;
     margin: 0;
     color: #FD6C34;
 }
 
 #sub-heading {
-    font-size: 3vw;
+    font-size: .8rem;
     color: #000000;
 }
 
 #notice-heading {
-    font-size: 2.5vw;
+    font-size: 0.8rem;
     background-color: #5E17EB;
     border-radius: 15px;
     padding: 0;
@@ -78,9 +78,9 @@ body{
     align-self: center;
 }
 
-#nss-logo {
-    width: 80%;
-}
+/* #nss-logo {
+    width: 4rem;
+} */
 
 #mannam-photo {
     border-radius: 50%;
@@ -91,7 +91,7 @@ body{
     grid-template-rows: auto auto auto;
     justify-content: center;
     align-items: center;
-    font-size: 1.9vw;
+    font-size: 0.6rem;
 }
 
 .body-texts {
@@ -102,19 +102,19 @@ body{
 
 .red-text {
     color: #F42851;
-    font-size: 2.2vw;
+    font-size: 0.7rem;
 }
 
 #meeting-time{
-    font-size: 2.5vw;
+    font-size: 0.8rem;
 }
 
 #footer-container{
     display: grid;
     grid-template-columns: 2fr 1fr;
-    padding-left: 3vw;
-    padding-right: 3vw;
-    font-size: 1.8vw;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    font-size: 0.5rem;
     width: 90%;
 }
 
